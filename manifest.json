@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name":"instaFinder",
+    "short_name": "instaFinder",
+    "description": "Find insta profiles easily!",
+    "version": "0.0.1",
+    "content_scripts": [
+        {
+                "run_at": "document_end",
+                "matches":["https://*.linkedin.com/*"],
+                "js": ["javascript/content.js"]
+        }
+    ],
+    "background": {
+		"scripts": [
+			"javascript/background.js"
+		]
+	},
+    "browser_action":{
+        "default_icon": "logo.png",
+        "default_popup": "popup.html"
+    }
+}
