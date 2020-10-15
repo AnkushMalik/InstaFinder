@@ -1,5 +1,11 @@
 chrome.runtime.onMessage.addListener(request => {
-    if (request.method ==='pageLoad'){
+    if (request.method ==='pageLoad' || document.querySelector('.insta_button_container')){
+
+        let ext_styles = document.createElement('Link')
+        ext_styles.rel="stylesheet"
+        ext_styles.href = chrome.extension.getURL('stylesheets/index.css')
+        document.querySelector('html head').append(ext_styles)
+
         let action_button_parent = document.querySelector('section[id*="ember"] .display-flex div.ember-view[id*="ember"].inline-flex')
         if(action_button_parent){
             appendSearchInstaButton(action_button_parent)
@@ -11,8 +17,10 @@ chrome.runtime.onMessage.addListener(request => {
 const searchInstaButton = () => {
     let node = document.createElement("DIV");
     node.classList.add('insta_button_container')
+    node.style.display='none'
 
     let imgNode = document.createElement('img')
+    imgNode.classList.add('insta_button_img')
     imgNode.src = chrome.extension.getURL('images/instagram_icon.png')
 
     let buttonText = document.createElement('span')
@@ -27,4 +35,5 @@ const searchInstaButton = () => {
 
 function appendSearchInstaButton(parent){
     console.log('from append action:', parent, searchInstaButton())
+    parent.insertBefore(searchInstaButton(),parent.childNodes[0])
 }

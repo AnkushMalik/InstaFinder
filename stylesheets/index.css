@@ -1,0 +1,21 @@
+.insta_button_container{
+    height: 3.25rem;
+    background: #c360bc;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem 1rem;
+    padding-left: 0;
+    border-radius: .75rem;
+}
+.insta_button_img{
+    height: 50px;
+    position: relative;
+    left: -.5rem;
+    cursor: pointer;
+}
+.insta_button_text{
+    color: #ffffff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
