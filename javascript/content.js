@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(request => {
-    if (request.method ==='pageLoad' || document.querySelector('.insta_button_container')){
+    if (request.method ==='pageLoad' && !document.querySelector('.insta_button_container')){
 
         let ext_styles = document.createElement('Link')
         ext_styles.rel="stylesheet"
