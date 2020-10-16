@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(request => {
         if(action_button_parent){
             appendSearchInstaButton(action_button_parent)
         }
-        console.log('>>>>',chrome.extension.getURL('test.html'))
+        console.log('>>>>',chrome.extension.getURL('main.html'))
     }
 })
 
@@ -18,6 +18,13 @@ const searchInstaButton = () => {
     let node = document.createElement("DIV");
     node.classList.add('insta_button_container')
     node.style.display='none'
+    node.onclick=()=>{
+        let user_name = document.querySelector('.inline.t-24.t-black.t-normal.break-words').innerText
+        console.log('user_name>>>>>',user_name)
+        chrome.runtime.sendMessage({grabbedUserName: user_name}, function(response) {
+            console.log('message sent');
+        });          
+    }
 
     let imgNode = document.createElement('img')
     imgNode.classList.add('insta_button_img')
