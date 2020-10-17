@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(
                   "from a content script:" + sender.tab.url :
                   "from the extension");
       if (request.grabbedUserName){
-        console.log('>>>>>>>grabbed user\'s name : ', request.grabbedUserName)
+        console.log('>>>>>>>grabbed user\'s name : ', request.grabbedUserName) // remove later
         chrome.windows.create({
             url: chrome.runtime.getURL("main.html"),
             type: "popup"
