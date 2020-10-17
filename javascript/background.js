@@ -8,6 +8,8 @@ chrome.tabs.onUpdated.addListener(function
     }
 });
 
+var mainWindowId = false;
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       console.log(sender.tab ?
@@ -15,10 +17,23 @@ chrome.runtime.onMessage.addListener(
                   "from the extension");
       if (request.grabbedUserName){
         console.log('>>>>>>>grabbed user\'s name : ', request.grabbedUserName) // remove later
-        chrome.windows.create({
-            url: chrome.runtime.getURL("main.html"),
-            type: "popup"
-        });
+        if(mainWindowId === false){
+            mainWindowId===true
+            chrome.windows.create({
+                url: chrome.runtime.getURL("main.html"),
+                type: "popup"
+            },function(win){
+                mainWindowId = win.id;
+            });
+        }else if(typeof mainWindowId ==='number'){
+            chrome.windows.update(mainWindowId,{focused:true});
+        }
       }
     }
 );
+
+chrome.windows.onRemoved.addListener(function (winId){
+    if(mainWindowId === winId){
+        mainWindowId = false;
+    }
+});

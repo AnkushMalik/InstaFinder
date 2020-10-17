@@ -1,1 +1,1 @@
-console.log('isJsloaded?',$)
+console.log('windowsearchparams',window.location)
