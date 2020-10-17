@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener(
         if(mainWindowId === false){
             mainWindowId===true
             chrome.windows.create({
-                url: chrome.runtime.getURL("main.html"),
+                url: `${chrome.runtime.getURL("main.html")}?search=${request.grabbedUserName}`,
                 type: "popup"
             },function(win){
                 mainWindowId = win.id;
