@@ -21,3 +21,60 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+
+body.main{
+    display: flex;
+    margin: 0 auto;
+    max-width: 1070px;
+    min-height: 100vh;
+}
+
+body.main .main_container{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.main_container .content{
+    box-sizing: border-box;
+    display: flex;
+}
+.main_container .content .phone{
+    position: relative;
+    border: 40px solid #F8F9FB;
+    border-width: 55px 7px;
+    border-radius: 36px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 1080px;
+    margin: 40px 40px;
+    width: 540px;
+}
+
+.phone #desc{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid #EDEEF7;
+}
+
+.phone #desc iframe{
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.phone #desc1{
+    position: absolute;
+    top: -58px;
+    left: -10px;
+    right: 0;
+    bottom: 0;
+    background: #D0D1DB;
+    z-index: -1;
+    width: calc(100% + 20px);
+    border-radius: 38px;
+    height: calc(100% + 116px);
+}
