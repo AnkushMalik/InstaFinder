@@ -34,10 +34,6 @@ chrome.windows.onRemoved.addListener(function (winId){
     }
 });
 
-
-
-
-
 let chromeTabId = null
 let instaUrl = 'https://www.instagram.com'
 
@@ -94,13 +90,6 @@ window.setCurrentTabId = tabId => {
     chromeTabId = tabId
 }
 
-function openNewTab() {
-    chrome.browserAction.setBadgeText({ text: '' })
-    chrome.tabs.create({ url: chrome.extension.getURL('app/index.html') }, tab => {
-        chromeTabId = tab.id
-    })
-}
-
 const iphoneUa =
     'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25'
 
@@ -144,43 +133,6 @@ chrome.webRequest.onHeadersReceived.addListener(
     requestFilter,
     ['blocking', 'responseHeaders']
 )
-
-
-chrome.browserAction.onClicked.addListener(fromTab => {
-    if (chromeTabId !== null) {
-        chrome.tabs.remove(chromeTabId, tab => {
-            if (chrome.runtime.lastError) {
-                console.log(chrome.runtime.lastError);
-            }
-            openNewTab()
-        })
-    } else {
-        openNewTab()
-    }
-})
-
-chrome.runtime.onMessage.addListener((msg, sender, send) => {
-    if (msg === 'refresh') {
-        chrome.tabs.remove(chromeTabId, tab => {
-            if (chrome.runtime.lastError) {
-                console.log(chrome.runtime.lastError);
-            }
-            openNewTab()
-        })
-    } else if (msg === 'isInstaHelperEnabled' && sender.tab && sender.tab.id === chromeTabId) {
-        send({ isInstaHelperEnabled: true })
-    } else {
-        //send(false)
-    }
-})
-
-chrome.runtime.onInstalled.addListener(async({ response }) => {
-    if (response !== 'install' || response !== 'update') {
-        chrome.tabs.create({
-            url: chrome.extension.getURL('app/index.html')
-        })
-    }
-})
 
 async function checkNotification() {
     const { notifications } = await window.loadInstagram()

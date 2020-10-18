@@ -1,3 +1,4 @@
+/* content.js styles starts here */
 .insta_button_container{
     height: 3.25rem;
     background: #c360bc;
@@ -21,7 +22,9 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+/* content.js styles ends here */
 
+/* Main.html starts here*/
 body.main{
     display: flex;
     margin: 0 auto;
@@ -157,7 +160,7 @@ body.main .hide{
 }
 
 .container .content .phone #search_results .user_info img{
-    height: 60px;
+    height: 70px;
     border-radius: 2rem;
     cursor: pointer;
 }
@@ -199,3 +202,5 @@ body.main .hide{
     border-radius: 38px;
     height: calc(100% + 116px);
 }
+
+/* Main.html ends here*/
