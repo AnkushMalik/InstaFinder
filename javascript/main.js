@@ -130,7 +130,7 @@ chrome.tabs.getCurrent(() => {
                 $("#nav-back-btn,#search_results").toggleClass('hide')
                 setTimeout(function() { 
                     $("#instaframe").toggleClass('hide')
-                }, 1200);
+                }, 2000);
             })
         },
         error: (request, status, error) => {
