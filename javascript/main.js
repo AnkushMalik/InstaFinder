@@ -4,7 +4,7 @@ const mainContainer = `
 <link rel="stylesheet" href="./stylesheets/index.css">
 <div class="container">
     <div class="left-column">
-        <button id="nav-back-btn" class="nav-back-btn hide">
+        <button id="nav-back-btn" class="nav-back-btn btn hide">
             <span class="arrow_back">
                 <
             </span>
@@ -23,7 +23,7 @@ const mainContainer = `
             </div>
             <div id="desc">
                 <iframe id="instaframe" class="hide" src="https://www.instagram.com/" frameborder="0"></iframe>
-                <div class='search_results'></div>
+                <div id='search_results'></div>
             </div>
             <div id="desc1"></div>
         </div>
@@ -73,13 +73,12 @@ async function appStart() {
         } else {
             $('#instaframe').show();
         }
-        $('#nav-back-btn').on('click',goStepBack)
     })
 }
 
 function goStepBack() {
     // $('#').slideDown();
-    $("#instaframe, #nav-back-btn").toggleClass('hide')
+    $("#instaframe, #nav-back-btn, #search_results").toggleClass('hide')
 }
 
 function getChromeVersion(){
@@ -116,8 +115,22 @@ chrome.tabs.getCurrent(() => {
         url: `https://www.instagram.com/web/search/topsearch/?context=blended&query=${name_query}`,
         success: (response) => {
             console.log(response, JSON.stringify(response.users))
-            response.users.forEach((e,i)=>{ //will modify in future commits to render users properly with name,dp and follow btns
-                $('.search_results').append(`<span>${e.user.username}</span><br>`);
+            $('#nav-back-btn').on('click', goStepBack);
+            response.users.forEach(e=>{ //will modify in future commits to render users properly with name,dp and follow btns
+                $('#search_results').append(`
+                    <div class='user_info' data-username=${e.user.username}>
+                        <img src=${e.user.profile_pic_url} />
+                        <span>${e.user.username}</span>
+                        <div><button class='btn'>Follow</button></div>
+                    </div>
+                `);
+            })
+            $('#search_results .user_info').click(function(){
+                $('#instaframe').attr('src',`https://instagram.com/${this.dataset.username}`)
+                $("#nav-back-btn,#search_results").toggleClass('hide')
+                setTimeout(function() { 
+                    $("#instaframe").toggleClass('hide')
+                }, 1200);
             })
         },
         error: (request, status, error) => {

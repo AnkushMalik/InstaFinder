@@ -55,6 +55,11 @@ body.main .hide{
 
 .container .nav-back-btn {
     margin-top: 40px;
+    position: absolute;
+    right: 0;
+}
+
+.btn{
     font-size: 14px;
     padding: 6px 12px;
     margin-bottom: 0;
@@ -68,11 +73,10 @@ body.main .hide{
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    position: absolute;
-    right: 0;
 }
-.nav-back-btn:hover,
-.nav-back-btn:focus {
+
+.btn:hover,
+.btn:focus {
     color: #333;
     text-decoration: none;
 }
@@ -88,8 +92,30 @@ body.main .hide{
     margin: 40px 40px;
     width: 540px;
 }
-.container .content .phone .search_results{
+.container .content .phone #search_results{
     background-color: #ffffff;
+}
+
+.container .content .phone #search_results .user_info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.2rem 1rem;
+}
+
+.container .content .phone #search_results .user_info img{
+    height: 60px;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.container .content .phone #search_results .user_info span{
+    cursor: pointer;
+    flex: 1;
+    padding-left: 1rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
 }
 
 .phone #desc{
