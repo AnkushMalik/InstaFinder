@@ -78,7 +78,6 @@ chrome.tabs.getCurrent(() => {
                     <div class='user_info' data-username=${e.user.username}>
                         <img src=${e.user.profile_pic_url} />
                         <span>${e.user.username}</span>
-                        <div><button class='btn'>Follow</button></div>
                     </div>
                 `);
             })
