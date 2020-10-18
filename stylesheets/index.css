@@ -40,6 +40,10 @@ body.main .container{
     height: inherit;
 }
 
+body.main .hide{
+    display: none !important;
+}
+
 .container .content{
     box-sizing: border-box;
     display: flex;
@@ -84,6 +88,9 @@ body.main .container{
     margin: 40px 40px;
     width: 540px;
 }
+.container .content .phone .search_results{
+    background-color: #ffffff;
+}
 
 .phone #desc{
     position: absolute;
@@ -92,6 +99,7 @@ body.main .container{
     left: 0;
     right: 0;
     border: 1px solid #EDEEF7;
+    overflow-y: scroll;
 }
 
 .phone #desc iframe{

@@ -4,7 +4,7 @@ const mainContainer = `
 <link rel="stylesheet" href="./stylesheets/index.css">
 <div class="container">
     <div class="left-column">
-        <button id="nav-back-btn" class="nav-back-btn">
+        <button id="nav-back-btn" class="nav-back-btn hide">
             <span class="arrow_back">
                 <
             </span>
@@ -22,7 +22,8 @@ const mainContainer = `
                 </div>
             </div>
             <div id="desc">
-                <iframe id="instaframe" src="https://www.instagram.com/" frameborder="0"></iframe>
+                <iframe id="instaframe" class="hide" src="https://www.instagram.com/" frameborder="0"></iframe>
+                <div class='search_results'></div>
             </div>
             <div id="desc1"></div>
         </div>
@@ -38,7 +39,6 @@ function getAndSetInstaCookies() {
 
 async function appStart() {
     getAndSetInstaCookies();
-    $('body').append(mainContainer)
 
     $(function () {
         function setMobileFrameSize() {
@@ -79,7 +79,7 @@ async function appStart() {
 
 function goStepBack() {
     // $('#').slideDown();
-    $("#instaframe,#nav-back-btn").hide();
+    $("#instaframe, #nav-back-btn").toggleClass('hide')
 }
 
 function getChromeVersion(){
@@ -103,10 +103,25 @@ chrome.webRequest.onHeadersReceived.addListener(
 );
 
 chrome.tabs.getCurrent(() => {
+    $('body').append(mainContainer)
+    // try {
+    //     appStart();
+    // } catch (error) {
+    //     console.log(error)
+    // }
+    var name_query = window.location.search.split('=').pop();
 
-    try {
-        appStart();
-    } catch (error) {
-        console.log(error)
-    }
+    $.ajax({
+        type:'GET',
+        url: `https://www.instagram.com/web/search/topsearch/?context=blended&query=${name_query}`,
+        success: (response) => {
+            console.log(response, JSON.stringify(response.users))
+            response.users.forEach((e,i)=>{ //will modify in future commits to render users properly with name,dp and follow btns
+                $('.search_results').append(`<span>${e.user.username}</span><br>`);
+            })
+        },
+        error: (request, status, error) => {
+            alert('Something went wrong while communicating with instagram. Please try again.')
+        }
+    });
 })
