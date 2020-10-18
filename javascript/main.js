@@ -37,44 +37,7 @@ function getAndSetInstaCookies() {
     localStorage.setItem('insta_count', instaCountCookie + 1);
 }
 
-async function appStart() {
-    getAndSetInstaCookies();
-
-    $(function () {
-        function setMobileFrameSize() {
-            var mobileWidth = $(window).outerHeight() * 75 / 100
-            $('.phone').width(mobileWidth);
-        }
-
-        setMobileFrameSize();
-
-        $(window).on('resize', function () {
-            setMobileFrameSize();
-        })
-    });
-
-    chromeBgPage.loadInstagram().then(res => {
-        if (!res.connectionEstablished) {
-            $('#instaframe').hide()
-            $('#desc').append(`
-                <div class="desc-offline">
-                    <div class="offline-info">
-                        <p>
-                            Please
-                            <a style="color: white" href="https://www.instagram.com/" 
-                                target="_blank" rel="noopener noreferrer">
-                                    sign in
-                            </a>
-                        </p>
-                        <p class="second-row">and then <a href="" style="color: white">refresh</a></p>
-                        <p class="second-row">this page</p>
-                    </div>
-                </div>`)
-        } else {
-            $('#instaframe').show();
-        }
-    })
-}
+getAndSetInstaCookies();
 
 function goStepBack() {
     // $('#').slideDown();
@@ -103,18 +66,12 @@ chrome.webRequest.onHeadersReceived.addListener(
 
 chrome.tabs.getCurrent(() => {
     $('body').append(mainContainer)
-    // try {
-    //     appStart();
-    // } catch (error) {
-    //     console.log(error)
-    // }
     var name_query = window.location.search.split('=').pop();
 
     $.ajax({
         type:'GET',
         url: `https://www.instagram.com/web/search/topsearch/?context=blended&query=${name_query}`,
         success: (response) => {
-            console.log(response, JSON.stringify(response.users))
             $('#nav-back-btn').on('click', goStepBack);
             response.users.forEach(e=>{ //will modify in future commits to render users properly with name,dp and follow btns
                 $('#search_results').append(`
