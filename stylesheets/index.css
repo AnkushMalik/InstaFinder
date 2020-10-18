@@ -27,24 +27,58 @@ body.main{
     margin: 0 auto;
     max-width: 1070px;
     min-height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    height: 100vh;
 }
 
-body.main .main_container{
+body.main .container{
     flex-grow: 1;
     display: flex;
     justify-content: center;
+    height: inherit;
 }
 
-.main_container .content{
+.container .content{
     box-sizing: border-box;
     display: flex;
 }
-.main_container .content .phone{
+
+.container .left-column{
+    position: relative;
+}
+
+.container .nav-back-btn {
+    margin-top: 40px;
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    position: absolute;
+    right: 0;
+}
+.nav-back-btn:hover,
+.nav-back-btn:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.container .content .phone{
     position: relative;
     border: 40px solid #F8F9FB;
     border-width: 55px 7px;
     border-radius: 36px;
-    max-width: 600px;
+    max-width: 800px;
     min-width: 300px;
     max-height: 1080px;
     margin: 40px 40px;
