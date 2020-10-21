@@ -1,3 +1,10 @@
+chrome.runtime.onMessage.addListener(request => {
+    if (request.method.update){
+        window.location.replace(`${chrome.runtime.getURL("main.html")}?search=${request.method.grabbedUserName}`)
+    }
+})
+
+
 const chromeBgPage = chrome.extension.getBackgroundPage()
 
 const mainContainer = `

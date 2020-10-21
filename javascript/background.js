@@ -4,7 +4,6 @@ chrome.tabs.onUpdated.addListener(function
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
             chrome.tabs.sendMessage(tabs[0].id, { method: "pageLoad" })
         })
-        
     }
 });
 
@@ -12,23 +11,32 @@ var mainWindowId = false;
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-      if (request.grabbedUserName){
-        if(mainWindowId === false){
-            mainWindowId===true
-            chrome.windows.create({
-                url: `${chrome.runtime.getURL("main.html")}?search=${request.grabbedUserName}`,
-                type: "popup",
-                height: 700,
-                width: 625,
-                top: 100,
-                left: 9999, // stick to right side of window no matter what the size of window is
-            },function(win){
-                mainWindowId = win.id;
-            });
-        }else if(typeof mainWindowId ==='number'){
-            chrome.windows.update(mainWindowId,{focused:true});
+        var grabbedUserName = request.grabbedUserName
+        if (grabbedUserName){
+            if(mainWindowId === false){
+                mainWindowId===true
+                chrome.windows.create({
+                    url: `${chrome.runtime.getURL("main.html")}?search=${grabbedUserName}`,
+                    type: "popup",
+                    height: 700,
+                    width: 625,
+                    top: 100,
+                    left: 9999, // stick to right side of window no matter what the size of window is
+                },function(win){
+                    mainWindowId = win.id;
+                });
+            }else if(typeof mainWindowId ==='number'){
+                // chrome.tabs.query({ windowType:"popup" }, tabs => {
+                //     // chrome.tabs.sendMessage(tabs[0].id, { method: "pageLoad" })
+                //     console.log('popup',tabs)
+                //     chrome.tabs.executeScript(tabs[0].id, window.location.replace(`${chrome.runtime.getURL("main.html")}?search=${grabbedUserName}`));
+                // })
+                chrome.tabs.query({ windowType:"popup" }, tabs => {
+                    chrome.tabs.sendMessage(tabs[0].id, { method: { update:true, grabbedUserName:grabbedUserName }  })
+                })
+                chrome.windows.update(mainWindowId,{focused:true});
+            }
         }
-      }
     }
 );
 
