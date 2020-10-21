@@ -150,6 +150,12 @@ body.main .hide{
 
 .container .content .phone #search_results{
     background-color: #ffffff;
+    min-height: -webkit-fill-available;
+}
+.container .content .phone #search_results .search_error_msg{
+    text-align:center;
+    margin:2rem;
+    font-size:1rem;
 }
 
 .container .content .phone #search_results .user_info{

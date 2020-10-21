@@ -80,17 +80,18 @@ chrome.tabs.getCurrent(() => {
         success: (response) => {
             $('#nav-back-btn').on('click', goStepBack);
             console.log(response.users)
-            response.users.forEach(e=>{ //will modify in future commits to render users properly with name,dp and follow btns
-                $('#search_results').append(`
-                    <div class='user_info' data-username=${e.user.username}>
-                        <img src=${e.user.profile_pic_url} />
-                        <span class='user_account_details'>
-                            <strong>${e.user.username}</strong>
-                            <span>${e.user.full_name} ${e.user.friendship_status&&e.user.friendship_status.following? ' • Following': ''}</span>
-                        </span>
-                    </div>
-                `);
-            })
+            response.users.length?
+                response.users.forEach(e=>{ //will modify in future commits to render users properly with name,dp and follow btns
+                    $('#search_results').append(`
+                        <div class='user_info' data-username=${e.user.username}>
+                            <img src=${e.user.profile_pic_url} />
+                            <span class='user_account_details'>
+                                <strong>${e.user.username}</strong>
+                                <span>${e.user.full_name} ${e.user.friendship_status&&e.user.friendship_status.following? ' • Following': ''}</span>
+                            </span>
+                        </div>
+                    `);
+                }) : $('#search_results').append(`<p class='search_error_msg'>No user found with this name</p>`);
             $('#search_results .user_info').click(function(){
                 $('#instaframe').attr('src',`https://www.instagram.com/${this.dataset.username}/`)
                 $("#nav-back-btn,#search_results").toggleClass('hide')
