@@ -19,8 +19,8 @@ const searchInstaButton = () => {
     node.classList.add('insta_button_container')
     node.style.display='none'
     node.onclick=()=>{
-        let user_name = document.querySelector('.inline.t-24.t-black.t-normal.break-words').innerText
-        console.log('user_name>>>>>',user_name)
+        let user_name = document.querySelector('.inline.t-24.t-black.t-normal.break-words').innerText.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim()
+
         chrome.runtime.sendMessage({grabbedUserName: user_name}, function(response) {
             console.log('message sent');
         });          
