@@ -165,13 +165,24 @@ body.main .hide{
     cursor: pointer;
 }
 
-.container .content .phone #search_results .user_info span{
+.container .content .phone #search_results .user_info .user_account_details{
     cursor: pointer;
     flex: 1;
     padding-left: 1rem;
     min-height: 60px;
     display: flex;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: grey;
+    font-size: 14px;
+}
+
+.container .content .phone #search_results .user_info .user_account_details strong {
+    margin-bottom: .5rem;
+    color: #000000;
 }
 
 .phone #desc{
