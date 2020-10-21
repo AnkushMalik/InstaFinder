@@ -214,4 +214,28 @@ body.main .hide{
     height: calc(100% + 116px);
 }
 
+/* Main.html mobile view starts here */
+@media only screen and (max-width: 650px) {
+    body.main .container .content{
+        min-width: 100%;
+    }
+
+    body.main .container .nav-back-btn{
+        margin-top: 40px;
+        position: absolute;
+        right: -5rem;
+        top: -1.5rem;
+        z-index: 99;
+        background-color: #555;
+        color: white;
+    }
+
+    body.main .container .content .phone{
+        margin: 0;
+        border-radius: 0;
+        width: 100%;
+    }
+}
+/* Main.html mobile view ends here */
+
 /* Main.html ends here*/

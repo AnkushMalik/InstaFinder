@@ -17,7 +17,11 @@ chrome.runtime.onMessage.addListener(
             mainWindowId===true
             chrome.windows.create({
                 url: `${chrome.runtime.getURL("main.html")}?search=${request.grabbedUserName}`,
-                type: "popup"
+                type: "popup",
+                height: 700,
+                width: 625,
+                top: 100,
+                left: 9999, // stick to right side of window no matter what the size of window is
             },function(win){
                 mainWindowId = win.id;
             });

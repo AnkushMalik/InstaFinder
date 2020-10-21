@@ -87,9 +87,7 @@ chrome.tabs.getCurrent(() => {
             $('#search_results .user_info').click(function(){
                 $('#instaframe').attr('src',`https://www.instagram.com/${this.dataset.username}/`)
                 $("#nav-back-btn,#search_results").toggleClass('hide')
-                setTimeout(function() { 
-                    $("#instaframe").toggleClass('hide')
-                }, 2000);
+                $("#instaframe").toggleClass('hide')
             })
         },
         error: (request, status, error) => {
