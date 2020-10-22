@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(request => {
-    if (request.method.update){
+    if (request && request.method  && request.method.update){
         window.location.replace(`${chrome.runtime.getURL("main.html")}?search=${request.method.grabbedUserName}`)
     }
 })
